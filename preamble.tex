@@ -118,7 +118,7 @@
 % Зачем: Нумерация страниц располагается справа снизу страницы
 % Почему: Пункт 2.2.8 Требований по оформлению пояснительной записки.
 \fancyhf{} % очистка текущих значений
-\fancyfoot[R]{\thepage} % установка верхнего колонтитула
+\fancyfoot[C]{\thepage} % установка верхнего колонтитула
 \renewcommand{\footrulewidth}{0pt} % убрать разделительную линию внизу страницы
 \renewcommand{\headrulewidth}{0pt} % убрать разделительную линию вверху страницы
 \fancypagestyle{plain}{ 
@@ -134,7 +134,7 @@
     {\fivecharsapprox}%
     {-1em \@plus -1ex \@minus -.2ex}%
     {1em \@plus .2ex}%
-    {\raggedright\hyphenpenalty=10000\normalfont\large\bfseries\MakeUppercase}}
+    {\raggedright\hyphenpenalty=10000\normalfont\large\bfseries}}
 \makeatother
 
 
@@ -177,7 +177,7 @@
 
 % Зачем: Задает стиль библиографии
 % Почему: Пункт 2.8.6 Требований по оформлению пояснительной записки.
-\bibliographystyle{styles/belarus-specific-utf8gost780u}
+\bibliographystyle{ugost2003}
 
 
 % Зачем: Пакет для вставки картинок
@@ -187,7 +187,7 @@
 
 
 % Зачем: Директория в которой будет происходить поиск картинок
-\graphicspath{{figures/}}
+\graphicspath{{pictures/}}
 
 
 % Зачем: Добавление подписей к рисункам
@@ -208,7 +208,7 @@
 
 % Зачем: Задание подписей, разделителя и нумерации частей рисунков
 % Почему: Пункт 2.5.5 Требований по оформлению пояснительной записки.
-\DeclareCaptionLabelFormat{stbfigure}{Рисунок #2}
+\DeclareCaptionLabelFormat{stbfigure}{Рис. #2}
 \DeclareCaptionLabelFormat{stbtable}{Таблица #2}
 \DeclareCaptionLabelSeparator{stb}{~--~}
 \captionsetup{labelsep=stb}
@@ -297,18 +297,19 @@
 % Зачем: Устанавливает отступ от границы документа до символа списка, чтобы этот отступ равнялся отступу параграфа
 % Почему: Пункт 2.3.5 Требований по оформлению пояснительной записки.
 
+\setlist[itemize]{leftmargin=0ex}
 \setlist[itemize,0]{itemindent=\parindent + 2.2ex,leftmargin=0ex,label=--}
 \setlist[enumerate,1]{itemindent=\parindent + 2.7ex,leftmargin=0ex}
 \setlist[enumerate,2]{itemindent=\parindent + \parindent - 2.7ex}
 
 % Зачем: Включение номера раздела в номер формулы. Нумерация формул внутри раздела.
-\AtBeginDocument{\numberwithin{equation}{section}}
+%\AtBeginDocument{\numberwithin{equation}{section}}
 
 % Зачем: Включение номера раздела в номер таблицы. Нумерация таблиц внутри раздела.
-\AtBeginDocument{\numberwithin{table}{section}}
+%\AtBeginDocument{\numberwithin{table}{section}}
 
 % Зачем: Включение номера раздела в номер рисунка. Нумерация рисунков внутри раздела.
-\AtBeginDocument{\numberwithin{figure}{section}}
+%\AtBeginDocument{\numberwithin{figure}{section}}
 
 
 % Зачем: Дополнительные возможности в форматировании таблиц
@@ -340,12 +341,12 @@
 \usepackage{verbatim}
 
 
-\usepackage{xcolor}
+\usepackage[dvipsnames]{xcolor}
 
 
 % Зачем: Оформление листингов кода
 % Примечание: final нужен для переопределения режима draft, в котором листинги не выводятся в документ.
-\usepackage[final]{listings}
+\usepackage[final]{listingsutf8}
 
 
 % Зачем: настройка оформления листинга для языка F#
@@ -356,41 +357,72 @@
 
 \renewcommand{\lstlistingname}{Листинг}
 
-\lstdefinelanguage{FSharp}
-    {morekeywords={abstract,and,as,assert,base,begin,class,default,delegate,do,done,downcast,downto,elif,else,end,exception,extern,false,finally,for,fun,function,global,if,in,inherit,inline,interface,internal,lazy,let,let!,match,member,module,mutable,namespace,new,not,null,of,open,or,override,private,public,rec,return,return!,select,static,struct,then,to,true,try,type,upcast,use,use!,val,void,when,while,with,yield,yield!,asr,land,lor,lsl,lsr,lxor,mod,sig,atomic,break,checked,component,const,constraint,constructor,continue,eager,event,external,fixed,functor,include,method,mixin,object,parallel,process,protected,pure,sealed,tailcall,trait,virtual,volatile},
-    keywordstyle=\bfseries\color{bluekeywords},
-    sensitive=false,
-    morecomment=[l][\color{greencomments}]{///},
-    morecomment=[l][\color{greencomments}]{//},
-    morecomment=[s][\color{greencomments}]{{(*}{*)}},
-    morestring=[b]",
-    stringstyle=\color{redstrings},
-    }
+\lstdefinelanguage{Kotlin}{
+  keywords={package, as, typealias, this, super, val, var, fun, for, null, true, false, is, in, throw, return, break, continue, object, if, try, else, while, do, when, yield, typeof, yield, typeof, class, interface, enum, object, override, public, private, get, set, import, abstract, },
+  keywordstyle=\color{NavyBlue}\bfseries,
+  ndkeywords={@Deprecated, Iterable, Int, Integer, Float, Double, String, Runnable, dynamic},
+  ndkeywordstyle=\color{BurntOrange}\bfseries,
+  emph={println, return@, forEach,},
+  emphstyle={\color{OrangeRed}},
+  identifierstyle=\color{black},
+  sensitive=true,
+  commentstyle=\color{green}\ttfamily,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  stringstyle=\color{ForestGreen}\ttfamily,
+  morestring=[b]",
+  morestring=[s]{"""*}{*"""},
+  extendedchars=false
+}
 
-\lstdefinestyle{fsharpstyle}{
+\lstdefinelanguage{Go} {
+  % Keywords as defined in the language grammar
+  morekeywords=[1]{%
+    break,default,func,interface,select,case,defer,go,map,%
+    struct,chan,else,goto,package,switch,const,fallthrough,%
+    if,range,type, continue,for,import,return,var},
+  % Built-in functions
+  morekeywords=[2]{%
+    append,cap,close,complex,copy,delete,imag,%
+    len,make,new,panic,print,println,real,recover},
+  % Pre-declared types
+  morekeywords=[3]{%
+    bool,byte,complex64,complex128,error,float32,float64,%
+    int,int8,int16,int32,int64,rune,string,%
+    uint,uint8,uint16,uint32,uint64,uintptr},
+  % Constants and zero value
+  morekeywords=[4]{true,false,iota,nil},
+  keywordstyle=\color{NavyBlue}\bfseries,
+  % Strings : "foo", 'bar', `baz`
+  morestring=[b]{"},
+  morestring=[b]{'},
+  morestring=[b]{`},
+  % Comments : /* comment */ and // comment
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  % Options
+  sensitive=true,
+  extendedchars=false
+}
+
+\lstdefinestyle{kotlinstyle}{
    xleftmargin=0ex,
-   language=FSharp,
+   language=Kotlin,
    basicstyle=\footnotesize\ttfamily,
    breaklines=true,
    columns=fullflexible
 }
 
-\lstdefinestyle{csharpinlinestyle} {
-  language=[Sharp]C,
-  morekeywords={yield,var,get,set,from,select,partial,where,async,await},
-  breaklines=true,
-  columns=fullflexible,
-  basicstyle=\footnotesize\ttfamily
+\lstdefinestyle{gostyle}{
+   xleftmargin=0ex,
+   language=Go,
+   basicstyle=\footnotesize\ttfamily,
+   breaklines=true,
+   columns=fullflexible
 }
 
-\lstdefinestyle{csharpstyle}{
-  language=[Sharp]C,
-  frame=lr,
-  rulecolor=\color{blue!80!black}}
-
-
 % Зачем: Нумерация листингов в пределах секции
-\AtBeginDocument{\numberwithin{lstlisting}{section}}
+%\AtBeginDocument{\numberwithin{lstlisting}{section}}
 
 \usepackage[normalem]{ulem}
 
