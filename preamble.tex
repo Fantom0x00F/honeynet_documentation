@@ -212,9 +212,10 @@
 \DeclareCaptionLabelFormat{stbtable}{Таблица #2}
 \DeclareCaptionLabelSeparator{stb}{~--~}
 \captionsetup{labelsep=stb}
-\captionsetup[figure]{labelformat=stbfigure,justification=centering}
-\captionsetup[table]{labelformat=stbtable,justification=raggedright}
+\captionsetup[figure]{labelformat=stbfigure,figurewithin=none,justification=centering}
+\captionsetup[table]{labelformat=stbtable,justification=centering}
 \renewcommand{\thesubfigure}{\asbuk{subfigure}}
+
 
 % Зачем: Окружения для оформления формул
 % Почему: Пункт 2.4.7 требований по оформлению пояснительной записки и специфические требования различных кафедр
@@ -447,36 +448,6 @@
 \regtotcounter{section}
 
 \usepackage{etoolbox}
-
-\newcounter{totfigures}
-\newcounter{tottables}
-\newcounter{totreferences}
-\newcounter{totequation}
-
-\providecommand\totfig{} 
-\providecommand\tottab{}
-\providecommand\totref{}
-\providecommand\toteq{}
-
-\makeatletter
-\AtEndDocument{%
-  \addtocounter{totfigures}{\value{figure}}%
-  \addtocounter{tottables}{\value{table}}%
-  \addtocounter{totequation}{\value{equation}}
-  \immediate\write\@mainaux{%
-    \string\gdef\string\totfig{\number\value{totfigures}}%
-    \string\gdef\string\tottab{\number\value{tottables}}%
-    \string\gdef\string\totref{\number\value{totreferences}}%
-    \string\gdef\string\toteq{\number\value{totequation}}%
-  }%
-}
-\makeatother
-
-\pretocmd{\section}{\addtocounter{totfigures}{\value{figure}}\setcounter{figure}{0}}{}{}
-\pretocmd{\section}{\addtocounter{tottables}{\value{table}}\setcounter{table}{0}}{}{}
-\pretocmd{\section}{\addtocounter{totequation}{\value{equation}}\setcounter{equation}{0}}{}{}
-\pretocmd{\bibitem}{\addtocounter{totreferences}{1}}{}{}
-
 
 
 % Для оформления таблиц не влязящих на 1 страницу
