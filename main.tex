@@ -2,8 +2,9 @@
 
 \begin{document}
 
-%\input{diploma_title} % page 1
+\includepdf[pages={-}]{title.pdf}
 
+\includepdf[pages={-}]{referat.pdf}
 
 \setcounter{page}{3}
 
@@ -15,10 +16,5 @@
 
 \urlstyle{rm}
 \input{references}
-
-% \includepdf позволяет включить в результирующий pdf документ часть другого pdf документа, сделанного
-% например не с помощью TeX. Бывает полезно, если какие-то диаграммны нарисованы, например, с помощью 
-% Microoft Office и сохранены в pdf.
-%\includepdf[pages={-}]{documents_list.pdf}
 
 \end{document}

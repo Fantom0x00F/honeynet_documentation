@@ -1,9 +1,8 @@
-*.pdf
+main.pdf
 *.aux
 *.blg
 *.log
 *.out
-*.pdf
 *.synctex.gz
 *.toc
 
